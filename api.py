@@ -1,5 +1,13 @@
 import requests
-from config import API_ROOT_URL, API_PARAMS
+from requests.exceptions import HTTPError
+from config import JSONType
 
-response = requests.get(url=API_ROOT_URL, params=API_PARAMS)
-print(response.status_code)
+
+def fetch_data(endpoint: str, params: dict) -> JSONType:
+    response = requests.get(url=endpoint, params=params)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise HTTPError(
+            f"Error fetching data: {response.status_code} - {response.reason}"
+        )

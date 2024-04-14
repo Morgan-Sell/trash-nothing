@@ -1,11 +1,16 @@
+from typing import Any, Dict, List, Union
+
+
+# type aliases
+JSONType = Union[Dict[str, Any], List[Any]]
+
+
 # API configuraiton
-API_ROOT_URL = "https://hub.worldpop.org/rest/data"
+API_URL = "https://itunes.apple.com/search"
 API_PARAMS = {
-    "data": [
-        {
-            "alias": "wpgp",
-            "name": "Global per country 2000-2020",
-        }
-    ]
+    "term": "jurrasic5",
+    "country": "us",
+    "limit": 1,
 }
 
+# This defines a type alias that can be a Dict or a List, which are the typical structures of JSON data
