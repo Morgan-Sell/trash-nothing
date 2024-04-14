@@ -1,0 +1,7 @@
+pytest
+black
+pandas
+isort
+requests_mock
+requests
+streamlit
