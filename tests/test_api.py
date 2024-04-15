@@ -12,7 +12,7 @@ def test_fetch_data_success(requests_mock):
 
     # call fetch_data function
     test_params = {"param1": "value1"}
-    response = fetch_data(test_url, test_params)
+    response = fetch_data(test_url, params=test_params, headers={})
 
     # test
     assert response == expected_response_data
@@ -24,4 +24,4 @@ def test_fetch_data_error(requests_mock):
     requests_mock.get(test_url, status_code=500)
 
     with pytest.raises(requests.HTTPError):
-        fetch_data(test_url, {})
+        fetch_data(test_url, params={}, headers={})
