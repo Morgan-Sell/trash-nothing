@@ -18,7 +18,7 @@ API_HEADERS = {
     "password": password,
 }
 API_PARAMS = {
-    "limit": 5,
+    "limit": 1,
 }
 
 

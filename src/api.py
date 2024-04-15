@@ -1,6 +1,6 @@
 import requests
 from requests.exceptions import HTTPError
-from config import JSONType
+from .config import JSONType
 
 
 def fetch_data(endpoint: str, params: dict, headers: dict = {}) -> JSONType:
