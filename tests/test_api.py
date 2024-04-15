@@ -1,7 +1,7 @@
 import pytest
 import requests
 
-from api import fetch_data
+from .src.api import fetch_data
 
 
 def test_fetch_data_success(requests_mock):
