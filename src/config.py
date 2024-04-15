@@ -22,3 +22,5 @@ API_PARAMS = {
 }
 
 
+# Output file configuration
+CSV_OUTPUT_PATH = "data/auctions.csv"
