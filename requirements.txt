@@ -5,3 +5,4 @@ isort
 requests_mock
 requests
 streamlit
+python-dotenv
