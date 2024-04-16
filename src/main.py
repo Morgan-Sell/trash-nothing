@@ -1,6 +1,5 @@
 from src.config import API_URL, API_PARAMS, API_HEADERS
 from src.api import fetch_data
- 
 
 
 if __name__ == "__main__":

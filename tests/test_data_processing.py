@@ -1,0 +1,49 @@
+import os
+import csv
+from tempfile import TemporaryDirectory
+
+from whiskey_auction.src.data_processing import (
+    initialize_csv_with_headers,
+    append_data_to_csv,
+)
+
+
+def test_initialize_csv_with_headers_crates_file():
+    with TemporaryDirectory() as tmp_directory:
+        # define the path and headers
+        file_path = os.path.join(tmp_directory, "test.csv")
+        headers = ["var_A", "var_B", "var_C"]
+
+        # call the function
+        initialize_csv_with_headers(file_path, headers)
+
+        # confirm the file has ben created
+        assert os.path.exists(file_path)
+
+        # confirm that file has the correct headers
+        with open(file_path, mode="r", newline="") as file:
+            reader = csv.reader(file)
+            read_headers = next(reader)
+            assert read_headers == headers
+
+
+def test_initialize_csv_does_not_overwrite_existing_file():
+    with TemporaryDirectory() as tmp_directory:
+        # define the path and headers
+        file_path = os.path.join(tmp_directory, "test.csv")
+        headers = ["var_A", "var_B", "var_C"]
+        initial_data = ["xx", "yy", "zz"]
+
+        # create an initial file with different content
+        with open(file_path, "w", newline="") as file:
+            writer = csv.writer(file)
+            writer.writerow(initial_data)
+        
+        # call the function
+        initialize_csv_with_headers(file_path, headers)
+
+        # confirm that initial_data is still there
+        with open(file_path, mode="r", newline="") as file:
+            reader = csv.reader(file)
+            data = next(reader)
+            assert data == initial_data
