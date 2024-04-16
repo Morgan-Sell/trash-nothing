@@ -1,10 +1,12 @@
 import csv
 import os
 from tempfile import NamedTemporaryFile, TemporaryDirectory
+import pytest
 
 from whiskey_auction.src.data_processing import (
     append_data_to_csv,
     initialize_csv_with_headers,
+    # convert_json_to_auction,
 )
 
 from .conftest import MockAuction
@@ -68,3 +70,21 @@ def test_append_data_csv():
         # check expected results
         assert lines[0].strip() == "Oaxacan Mezcal,2024-01-01,345.67"
         assert lines[1].strip() == "Argentine Malbec,2010-10-31,3890.12"
+
+
+def test_convert_json_to_auction(sample_whiskey_api_data):
+    # call the function
+    auction = convert_json_to_auction(sample_whiskey_api_data)
+
+    expected_results = Action(
+        name="Australian Whisky Auctions",
+        date="2024-03-01",
+        winning_bid_max=5167.3,
+        winning_bid_min=11.9,
+        winning_bid_mean=204.82,
+        trading_volume=259096.9,
+        lots_count=1265,
+    )
+
+    # check expected results
+    assert auction == expected_results
