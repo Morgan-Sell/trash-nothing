@@ -1,11 +1,11 @@
-import os
 import csv
-from tempfile import TemporaryDirectory
+import os
+from tempfile import NamedTemporaryFile, TemporaryDirectory
 
-from whiskey_auction.src.data_processing import (
-    initialize_csv_with_headers,
-    append_data_to_csv,
-)
+from whiskey_auction.src.data_processing import (append_data_to_csv,
+                                                 initialize_csv_with_headers)
+
+from .conftest import MockAuction
 
 
 def test_initialize_csv_with_headers_crates_file():
@@ -47,3 +47,17 @@ def test_initialize_csv_does_not_overwrite_existing_file():
             reader = csv.reader(file)
             data = next(reader)
             assert data == initial_data
+
+
+def test_append_data_csv():
+    with NamedTemporaryFile(mode="w+", delete=False) as tmp:
+        # initialize auction data
+        auction = MockAuction("Oaxacan Mezcal", "1-1-2024", 345.67)
+
+        # append data to temporary csv file
+        append_data_to_csv(tmp.name, auction)
+
+        # read data
+        tmp.seek(0)
+        lines = tmp.readlines()
+        assert lines[0].strip() == "Oaxacan Mezcal,1-1-2024,345.67"

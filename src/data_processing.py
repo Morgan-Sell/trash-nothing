@@ -14,4 +14,4 @@ def initialize_csv_with_headers(file_path: str, headers: list) -> None:
 def append_data_to_csv(file_path: str, data_class: Auction) -> None:
     with open(file_path, "a", newline="") as file:
         writer = csv.writer(file)
-        writer.writerow(data_class.__init__.values())
+        writer.writerow(data_class.values())
