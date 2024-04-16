@@ -2,8 +2,10 @@ import csv
 import os
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 
-from whiskey_auction.src.data_processing import (append_data_to_csv,
-                                                 initialize_csv_with_headers)
+from whiskey_auction.src.data_processing import (
+    append_data_to_csv,
+    initialize_csv_with_headers,
+)
 
 from .conftest import MockAuction
 
@@ -52,12 +54,17 @@ def test_initialize_csv_does_not_overwrite_existing_file():
 def test_append_data_csv():
     with NamedTemporaryFile(mode="w+", delete=False) as tmp:
         # initialize auction data
-        auction = MockAuction("Oaxacan Mezcal", "1-1-2024", 345.67)
+        auction1 = MockAuction("Oaxacan Mezcal", "2024-01-01", 345.67)
+        auction2 = MockAuction("Argentine Malbec", "2010-10-31", 3890.12)
 
         # append data to temporary csv file
-        append_data_to_csv(tmp.name, auction)
+        append_data_to_csv(tmp.name, auction1)
+        append_data_to_csv(tmp.name, auction2)
 
         # read data
         tmp.seek(0)
         lines = tmp.readlines()
-        assert lines[0].strip() == "Oaxacan Mezcal,1-1-2024,345.67"
+        
+        # check expected results
+        assert lines[0].strip() == "Oaxacan Mezcal,2024-01-01,345.67"
+        assert lines[1].strip() == "Argentine Malbec,2010-10-31,3890.12"
