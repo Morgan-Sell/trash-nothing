@@ -6,8 +6,9 @@ import pytest
 from whiskey_auction.src.data_processing import (
     append_data_to_csv,
     initialize_csv_with_headers,
-    # convert_json_to_auction,
+    convert_json_to_auction,
 )
+from whiskey_auction.src.models import Auction
 
 from .conftest import MockAuction
 
@@ -76,7 +77,7 @@ def test_convert_json_to_auction(sample_whiskey_api_data):
     # call the function
     auction = convert_json_to_auction(sample_whiskey_api_data)
 
-    expected_results = Action(
+    expected_results = Auction(
         name="Australian Whisky Auctions",
         date="2024-03-01",
         winning_bid_max=5167.3,
