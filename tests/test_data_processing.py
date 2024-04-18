@@ -8,6 +8,8 @@ from whiskey_auction.src.data_processing import (
     append_data_to_csv,
     initialize_csv_with_headers,
     convert_json_to_trash_post,
+    remove_emojis,
+    remove_newline_characters,
 )
 from whiskey_auction.src.models import TrashPost
 
@@ -117,3 +119,22 @@ def test_convert_json_to_trash_post(sample_trash_nothing_api_data):
 
     # check expected results
     assert post == expected_results
+
+
+def test_remove_emojis_emojis_and_text():
+    # test with no emojis
+    assert remove_emojis("There are no emojis") == "There are no emojis"
+    
+    # test with with emojis and text
+    assert (remove_emojis(
+        "😊 Start your engines 🚀 for the race! 👍"
+        ) == " Start your engines  for the race! ")
+
+
+
+def test_remove_newline_characters():
+    # test no newlines
+    assert remove_newline_characters(" No newlines") == " No newlines"
+
+    # test multiple newlines
+    assert remove_newline_characters("what's up\n dude\n?") == "what's up dude?"
