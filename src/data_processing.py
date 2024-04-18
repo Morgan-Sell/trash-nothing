@@ -2,7 +2,7 @@ import csv
 import os
 
 from .config import JSONType
-from .models import Auction
+from .models import TrashPost
 
 
 def initialize_csv_with_headers(file_path: str, headers: list) -> None:
@@ -12,21 +12,25 @@ def initialize_csv_with_headers(file_path: str, headers: list) -> None:
             writer.writerow(headers)
 
 
-def append_data_to_csv(file_path: str, data_class: Auction) -> None:
+def append_data_to_csv(file_path: str, data_class: TrashPost) -> None:
     with open(file_path, "a", newline="") as file:
         writer = csv.writer(file)
         writer.writerow(data_class.values())
 
 
 
-def convert_json_to_auction(data: JSONType) -> Auction:
-    auction = Auction(
-        name=data["auction_name"],
-        date=data["dt"],
-        winning_bid_max=data["winning_bid_max"],
-        winning_bid_min=data["winning_bid_min"],
-        winning_bid_mean=data["winning_bid_mean"],
-        trading_volume=data["auction_trading_volume"],
-        lots_count=data["auction_lots_count"],
+def convert_json_to_trash_post(data: JSONType) -> TrashPost:
+    post = TrashPost(
+        post_id=data["post_id"],
+        title=data["title"],
+        description=data["content"],
+        collection_days_times=data["collection_days_times"],
+        post_date=data["date"],
+        expiry_date=data["expiration"],
+        outcome=data["outcome"],
+        reply_measure=data["reply_measure"],
+        latitude=data["latitude"],
+        longitude=data["longitude"],
+        user_id=data["user_id"],
     )
-    return auction
+    return post

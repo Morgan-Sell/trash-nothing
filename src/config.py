@@ -4,23 +4,29 @@ import os
 
 # obtain API key from .env file
 load_dotenv()
-username = os.getenv("AUTH_USERNAME")
-password = os.getenv("AUTH_PASSWORD")
+api_key = os.getenv("API_KEY")
 
 # type aliases
 JSONType = Union[Dict[str, Any], List[Any]]
 
 
 # API configuraiton
-API_URL = "https://whiskyhunter.net/api/auctions_data"
+API_URL = "https://trashnothing.com/api/v1.4/posts"
 API_HEADERS = {
-    "username": username,
-    "password": password,
+
 }
 API_PARAMS = {
-    "limit": 1,
+    "api_key": api_key,
+    "sort_by": "date",
+    "types": "offer",
+    "sources": "trashnothing",
+    "per_page": 20,
+    "page": 1,
+    "latitude": 38.90,
+    "longitude": 77.0,
+    "radius": 160934, # in meters, equals 100 miles
 }
 
 
 # Output file configuration
-CSV_OUTPUT_PATH = "data/auctions.csv"
+CSV_OUTPUT_PATH = "whiskey_auction/data/auctions.csv"
