@@ -15,11 +15,10 @@ def main():
     data = fetch_data(API_URL, API_PARAMS, API_HEADERS)
 
     # for i in range(3):
-    pprint(data["posts"])
+    pprint(data["posts"][0])
 
-    print("Length:  ", len(data["posts"]))
     # transform JSON to dataclas
-    auction = convert_json_to_trash_post(data)
+    auction = convert_json_to_trash_post(data["posts"][0])
 
     # create csv w/ headers if csv does not exist
     initialize_csv_with_headers(CSV_OUTPUT_PATH, auction.keys())

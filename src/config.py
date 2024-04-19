@@ -19,14 +19,12 @@ API_PARAMS = {
     "api_key": api_key,
     "sort_by": "date",
     "types": "offer",
-    "sources": "trashnothing",
-    "per_page": 20,
+    "sources": "groups",
+    "group_ids": 4673, # DC ReUseIt group
+    "per_page": 1,
     "page": 1,
-    "latitude": 38.90,
-    "longitude": 77.0,
-    "radius": 160934, # in meters, equals 100 miles
 }
 
 
 # Output file configuration
-CSV_OUTPUT_PATH = "whiskey_auction/data/auctions.csv"
+CSV_OUTPUT_PATH = "/Users/morgan/Documents/16_ArjanCodes/next_level_python/whiskey_auction/data/trash_posts.csv"
