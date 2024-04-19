@@ -3,7 +3,7 @@ from config import (
 )
 from api import fetch_data
 from data_processing import (
-    convert_json_to_trash_post,
+    convert_json_to_trash_nothing_post,
     initialize_csv_with_headers,
     append_data_to_csv,
 )
@@ -18,7 +18,7 @@ def main():
     pprint(data["posts"][0])
 
     # transform JSON to dataclas
-    auction = convert_json_to_trash_post(data["posts"][0])
+    auction = convert_json_to_trash_nothing_post(data["posts"][0])
 
     # create csv w/ headers if csv does not exist
     initialize_csv_with_headers(CSV_OUTPUT_PATH, auction.keys())
