@@ -1,7 +1,7 @@
 import asyncio
 
 from config import (
-    API_URL, API_PARAMS, API_HEADERS, CSV_OUTPUT_PATH, NUM_CALLS
+    API_URL, API_PARAMS, CSV_OUTPUT_PATH, NUM_CALLS
 )
 from api import fetch_data
 from data_processing import (

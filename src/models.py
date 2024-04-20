@@ -36,10 +36,14 @@ class TrashNothingPost:
 
 
     def __post_init__(self):
+        # remove commas from title because saving to CSV
+        self.title = re.sub(",", "", self.title)
+        
         # clean description attribute
         self.description = self._remove_emojis(self.description)
         self.description = self._remove_newline_characters(self.description)
         self.description = self._remove_urls(self.description)
+        self.description = re.sub(",", "", self.description) # remoma comma because saving to CSV
 
         # round latitude and longitude
         self.latitude = round(self.latitude, 1)
@@ -127,3 +131,4 @@ class TrashNothingPost:
         cleaned_text = re.sub(url_pattern, "", text)
 
         return cleaned_text
+    
