@@ -20,16 +20,18 @@ async def main():
         await asyncio.sleep(1)
         task = fetch_data(API_URL, API_PARAMS, API_HEADERS)
         posts.append(task)
-
+        API_PARAMS["page"] += 1
+    print()
     results = await asyncio.gather(*posts, return_exceptions=True)
-
-    for result in results:
+    pprint(results)
+    print(len(results[0]["posts"]))
+    for result in results[0]["posts"]:
         if isinstance(result, Exception):
             print(result)
         
         else:        
             # transform JSON to dataclas
-            auction = convert_json_to_trash_nothing_post(result["posts"][0])
+            auction = convert_json_to_trash_nothing_post(result)
 
             # create csv w/ headers if csv does not exist
             initialize_csv_with_headers(CSV_OUTPUT_PATH, auction.keys())

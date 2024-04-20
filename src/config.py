@@ -21,7 +21,7 @@ API_PARAMS = {
     "types": "offer",
     "sources": "groups",
     "group_ids": 4673, # DC ReUseIt group
-    "per_page": 1,
+    "per_page": 5,
     "page": 1,
 }
 
