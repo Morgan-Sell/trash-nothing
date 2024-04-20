@@ -1,7 +1,7 @@
 from dataclasses import dataclass, fields
 
 import pytest
-from whiskey_auction.src.models import TrashPost
+from trash_nothing.src.models import TrashPost
 
 
 @dataclass

@@ -4,14 +4,14 @@ from pprint import pprint
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 import pytest
 
-from whiskey_auction.src.data_processing import (
+from trash_nothing.src.data_processing import (
     append_data_to_csv,
     initialize_csv_with_headers,
     convert_json_to_trash_post,
     remove_emojis,
     remove_newline_characters,
 )
-from whiskey_auction.src.models import TrashPost
+from trash_nothing.src.models import TrashPost
 
 from .conftest import MockTrashPost
 
