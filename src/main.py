@@ -1,7 +1,5 @@
 import asyncio
 
-
-
 from config import (
     API_URL, API_PARAMS, API_HEADERS, CSV_OUTPUT_PATH
 )
@@ -18,22 +16,27 @@ async def main():
     # pull data from API
     posts = []
 
-    for _ in range(10):
+    for _ in range(3):
+        await asyncio.sleep(1)
         task = fetch_data(API_URL, API_PARAMS, API_HEADERS)
         posts.append(task)
 
-    results = await asyncio.gather(*posts)
+    results = await asyncio.gather(*posts, return_exceptions=True)
 
-    for data in results:
-        # transform JSON to dataclas
-        auction = convert_json_to_trash_nothing_post(data["posts"][0])
+    for result in results:
+        if isinstance(result, Exception):
+            print(result)
+        
+        else:        
+            # transform JSON to dataclas
+            auction = convert_json_to_trash_nothing_post(result["posts"][0])
 
-        # create csv w/ headers if csv does not exist
-        initialize_csv_with_headers(CSV_OUTPUT_PATH, auction.keys())
+            # create csv w/ headers if csv does not exist
+            initialize_csv_with_headers(CSV_OUTPUT_PATH, auction.keys())
 
-        # append new data to CSV
-        append_data_to_csv(CSV_OUTPUT_PATH, auction)
-    
+            # append new data to CSV
+            append_data_to_csv(CSV_OUTPUT_PATH, auction)
+        
 
 if __name__ == "__main__":
     asyncio.run(main())
