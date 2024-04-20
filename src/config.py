@@ -22,9 +22,9 @@ API_PARAMS = {
     "sources": "groups",
     "group_ids": 4673, # DC ReUseIt group
     "per_page": 3,
-    "page": 2,
+    "page": 1,
 }
-NUM_CALLS = 5
+NUM_CALLS = 3
 
 # Output file configuration
 CSV_OUTPUT_PATH = "/Users/morgan/Documents/16_ArjanCodes/next_level_python/whiskey_auction/data/trash_posts.csv"

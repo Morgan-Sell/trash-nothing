@@ -6,7 +6,7 @@ import asyncio
 
 
 
-async def fetch_data(endpoint: str, params: dict, headers: dict = {}) -> JSONType:
+async def fetch_data(endpoint: str, params: dict, page: int) -> JSONType:
     """
     Sends a GET request to a specified URL endpoint with optional parameters and headers,
     returns the response data as a JSON object.
@@ -22,15 +22,9 @@ async def fetch_data(endpoint: str, params: dict, headers: dict = {}) -> JSONTyp
     Raises:
     - HTTPError: If the response status is not 200, indicating the fetch was unsuccessful.
     """
-    # response = requests.get(url=endpoint, params=params, headers=headers)
-    # if response.status_code == 200:
-    #     return response.json()
-    # else:
-    #     raise HTTPError(
-    #         f"Error fetching data: {response.status_code} - {response.reason}"
-    #     )
+    params["page"] = page
     async with aiohttp.ClientSession() as session:
-        async with session.get(endpoint, params=params, headers=headers) as response:
+        async with session.get(endpoint, params=params) as response:
             if response.status == 200:
                 return await response.json()
             else:

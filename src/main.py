@@ -18,11 +18,10 @@ async def main():
     posts = []
     
     # pull data from API and append to posts
-    for _ in range(NUM_CALLS):
+    for idx in range(NUM_CALLS):
         await asyncio.sleep(1)
-        task = fetch_data(API_URL, API_PARAMS, API_HEADERS)
+        task = fetch_data(API_URL, API_PARAMS, idx + 1)
         posts.append(task)
-        API_PARAMS["page"] += 1
 
     results = await asyncio.gather(*posts, return_exceptions=True)
 
