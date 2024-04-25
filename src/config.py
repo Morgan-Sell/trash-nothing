@@ -24,4 +24,4 @@ API_PARAMS = {
 NUM_CALLS = 3
 
 # Output file configuration
-CSV_OUTPUT_PATH = "/Users/morgan/Documents/16_ArjanCodes/next_level_python/whiskey_auction/data/trash_posts.csv"
+CSV_OUTPUT_PATH = "/Users/morgan/Documents/16_ArjanCodes/next_level_python/trash_nothing/data/trash_posts.csv"

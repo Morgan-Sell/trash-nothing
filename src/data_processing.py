@@ -2,8 +2,8 @@ import csv
 import os
 import re
 
-from config import JSONType
-from models import TrashNothingPost
+from .config import JSONType
+from .models import TrashNothingPost
 
 
 def initialize_csv_with_headers(file_path: str, headers: list) -> None:
