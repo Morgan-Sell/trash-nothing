@@ -7,11 +7,9 @@ import pytest
 from trash_nothing.src.data_processing import (
     append_data_to_csv,
     initialize_csv_with_headers,
-    convert_json_to_trash_post,
-    remove_emojis,
-    remove_newline_characters,
+    convert_json_to_trash_nothing_post,
 )
-from trash_nothing.src.models import TrashPost
+from trash_nothing.src.models import TrashNothingPost
 
 from .conftest import MockTrashPost
 
@@ -94,11 +92,11 @@ def test_append_data_csv():
         )
 
 
-def test_convert_json_to_trash_post(sample_trash_nothing_api_data):
+def test_convert_json_to_trash_nothing_post(sample_trash_nothing_api_data):
     # call the function
-    post = convert_json_to_trash_post(sample_trash_nothing_api_data)
+    post = convert_json_to_trash_nothing_post(sample_trash_nothing_api_data)
 
-    expected_results = TrashPost(
+    expected_results = TrashNothingPost(
         post_id=43065400,
         title="Verticals blind replacement slats (West Riverside off 91 freeway)",
         description="31/2 inches wide by 82 inches long. Pecan colored vertical blind "
@@ -119,22 +117,3 @@ def test_convert_json_to_trash_post(sample_trash_nothing_api_data):
 
     # check expected results
     assert post == expected_results
-
-
-def test_remove_emojis_emojis_and_text():
-    # test with no emojis
-    assert remove_emojis("There are no emojis") == "There are no emojis"
-    
-    # test with with emojis and text
-    assert (remove_emojis(
-        "😊 Start your engines 🚀 for the race! 👍"
-        ) == " Start your engines  for the race! ")
-
-
-
-def test_remove_newline_characters():
-    # test no newlines
-    assert remove_newline_characters(" No newlines") == " No newlines"
-
-    # test multiple newlines
-    assert remove_newline_characters("what's up\n dude\n?") == "what's up dude?"
