@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[metadata]
+name = "trash-nothing"
+version = "0.0.1"
+
+[project]
+name = "trash-nothing"
+version = "0.0.1"
+authors = [
+    { name="Morgan Sell", email="morganpsell@gmail.com" },
+]
+description = "Data analysis on items posted to trashnothing.com"
+readme = "README.md"
+requires-python = ">=3.10"
