@@ -6,3 +6,8 @@ requests_mock
 requests
 streamlit
 python-dotenv
+setuptools
+pytest-asyncio
+aiohttp
+pytest-mock
+pytest-aiohttp

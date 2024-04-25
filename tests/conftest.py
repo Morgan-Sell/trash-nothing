@@ -1,4 +1,6 @@
 from dataclasses import dataclass, fields
+from unittest.mock import AsyncMock
+from aiohttp import web
 
 import pytest
 from trash_nothing.src import TrashNothingPost
@@ -17,7 +19,7 @@ class MockTrashPost:
 
 @pytest.fixture(scope="module")
 def sample_trash_post():
-    trash_post = TrashPost(
+    trash_post = TrashNothingPost(
         post_id=1,
         title="Flying skateboard",
         description="Max speed is 90 mph. Has built in solar panel for charging.",
@@ -63,3 +65,18 @@ def sample_trash_nothing_api_data():
         "user_id": 9190382
     }
     return data
+
+
+@pytest.fixture(scope="module")
+async def mock_server(aiohttp_server):
+    """Fixture to create a mock response helper function"""
+    async def handler(request):
+        params = request.rel_url.query
+        if params.get("error") == "true":
+            return web.Response(status=404, text="Not Found")
+        return web.json_response(data={"key": "value"}, status=200)
+    
+    app = app.Application()
+    app.router.add_get("/api", handler)
+    return await aiohttp_server(app)
+ 

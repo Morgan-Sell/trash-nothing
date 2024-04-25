@@ -1,7 +1,7 @@
 from datetime import datetime
 import pytest
 
-from tash_nothing.src.models import TrashNothingPost
+from trash_nothing.src.models import TrashNothingPost
 
 
 def test_trash_nothing_post_post_init(sample_trash_nothing_api_data):
