@@ -15,3 +15,6 @@ authors = [
 description = "Data analysis on items posted to trashnothing.com"
 readme = "README.md"
 requires-python = ">=3.10"
+
+[tool.setuptools]
+packages = ["trash_nothing", "trash_nothing.src", "trash_nothing.tests"]
