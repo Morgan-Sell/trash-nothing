@@ -9,7 +9,10 @@ from trash_nothing.src.api import fetch_data
 
 @pytest.mark.asyncio
 async def test_fetch_data_success(mock_server):
+    # simulate server
     server = await mock_server
+    
+    # assumed params for fetch_data
     endpoint = str(server.make_url("/"))
     params = {"param": "value"}
     page = 3
@@ -21,18 +24,17 @@ async def test_fetch_data_success(mock_server):
     assert response == {"message": "Hello", "page": "3"}
 
 
-# @pytest.mark.asyncio
-# async def test_fetch_data_http_error(mock_response):
-#     # given params
-#     endpoint = "http://example.com/api"
-#     params = {"query": "error"}
-#     page = 33
-#     error_status = 404
+@pytest.mark.asyncio
+async def test_fetch_data_error(mock_server):
+    # simulate server
+    server = await mock_server
 
-#     # mock session and response setup
-#     response = mock_response(status=error_status, json_body={"error": "not found"})
-#     with patch("aiohttp.ClientSession.get", return_value=response), pytest.raises(aiohttp.ClientResponseError) as excinfo:
-#         await fetch_data(endpoint, params, page)
+    # assumed params for fetch_data
+    endpoint = str(server.make_url("/error"))
+    params = {"param": "value"}
+    page = 3
 
-        # test results
-        # assert excinfo.value.status == 404
+
+    # check for error
+    with pytest.raises(aiohttp.ClientResponseError):
+        await fetch_data(endpoint, params, page)
