@@ -3,6 +3,8 @@ import os
 import re
 from datetime import datetime
 
+import pandas as pd
+
 from .config import JSONType
 from .models import TrashNothingPost
 
@@ -75,8 +77,14 @@ def convert_json_to_trash_nothing_post(data: JSONType) -> TrashNothingPost:
     return post
 
 
-def calc_days_between_dates(start_date: datetime, end_date: datetime) -> int:
-    difference = end_date - start_date
-    total_seconds = difference.total_seconds()
-    days_diff = total_seconds // (24 * 60 * 60)
-    return days_diff
+def load_and_process_data(data: pd.DataFrame, start_date_var: str, end_date_var: str) -> pd.DataFrame:
+    df = pd.read_csv(data)
+
+    # transform to datetime objects
+    df[start_date_var] = pd.to_datetime(df[start_date_var])
+    df[end_date_var] = pd.to_datetime(df[end_date_var])
+
+    # calculate number of days that item can be picked up
+    df["days_available_for_pickup"] = (df[end_date_var] - df[start_date_var]).dt.days
+
+    return df
