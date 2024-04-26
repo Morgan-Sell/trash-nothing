@@ -17,4 +17,4 @@ readme = "README.md"
 requires-python = ">=3.10"
 
 [tool.setuptools]
-packages = ["trash_nothing", "trash_nothing.src", "trash_nothing.tests"]
+packages = ["trash_nothing", "trash_nothing.src", "trash_nothing.tests", "trash_nothing.img"]

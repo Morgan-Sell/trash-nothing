@@ -1,12 +1,11 @@
 import csv
 import os
-import re
 from datetime import datetime
 
 import pandas as pd
 
-from .config import JSONType
-from .models import TrashNothingPost
+from config import JSONType
+from models import TrashNothingPost
 
 
 def initialize_csv_with_headers(file_path: str, headers: list) -> None:
@@ -88,3 +87,4 @@ def load_and_process_data(data: pd.DataFrame, start_date_var: str, end_date_var:
     df["days_available_for_pickup"] = (df[end_date_var] - df[start_date_var]).dt.days
 
     return df
+

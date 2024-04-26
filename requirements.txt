@@ -11,3 +11,5 @@ pytest-asyncio
 aiohttp
 pytest-mock
 pytest-aiohttp
+plotly.express
+altair

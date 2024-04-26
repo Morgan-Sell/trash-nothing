@@ -93,9 +93,9 @@ def sample_dataset():
         "title": ["skateboard", "baseball", "kitchen sink", "guitar", "surfboard"],
         "description": [
             "wood with 4 wheels",
-            "white canvas and red stitch", 
-            "commercial size", 
-            "Played by BB King", 
+            "white canvas and red stitch",
+            "commercial size",
+            "Played by BB King",
             "Float on water",
         ],
         "collection_days_times": [
@@ -125,7 +125,7 @@ def sample_dataset():
         "longitude": [-84.2, -34.3, -100.1, -101.3, 50.1],
         "user_id": [3456, 1234, 6523, 33, 1983],
     }
-    
+
     df = pd.DataFrame(data)
 
     # transform to datetime objects
