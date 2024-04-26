@@ -1,8 +1,9 @@
 from dataclasses import dataclass, fields
 from unittest.mock import AsyncMock
-from aiohttp import web
 
 import pytest
+from aiohttp import web
+
 from trash_nothing.src import TrashNothingPost
 
 
@@ -35,6 +36,7 @@ def sample_trash_post():
 
     return trash_post
 
+
 @pytest.fixture(scope="module")
 def sample_trash_nothing_api_data():
     data = {
@@ -54,7 +56,7 @@ def sample_trash_nothing_api_data():
         "outcome": None,
         "outcome_date": None,
         "photos": None,
-        'post_id': 43065400,
+        "post_id": 43065400,
         "reply_measure": "low",
         "repost_count": 0,
         "reselling": None,
@@ -62,7 +64,7 @@ def sample_trash_nothing_api_data():
         "title": "Verticals blind replacement slats (West Riverside off 91 freeway)",
         "type": "offer",
         "url": "https://trashnothing.com/post/43065400/verticals-blind-replacement-slats-west-riverside-off-91-freeway",
-        "user_id": 9190382
+        "user_id": 9190382,
     }
     return data
 
@@ -70,14 +72,14 @@ def sample_trash_nothing_api_data():
 @pytest.fixture(scope="function")
 async def mock_server(aiohttp_server):
     """Fixture to create a mock response helper function"""
+
     async def hello(request):
         page = request.rel_url.query.get("page")
         if request.path == "/error":
             raise web.HTTPNotFound(text="Not found")
         return web.json_response(data={"message": "Hello", "page": page}, status=200)
-    
+
     app = web.Application()
     app.router.add_get("/", hello)
     app.router.add_get("/server", hello)
     return await aiohttp_server(app)
- 

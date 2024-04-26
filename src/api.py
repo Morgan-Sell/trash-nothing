@@ -1,9 +1,10 @@
-import requests
-from requests.exceptions import HTTPError
-from .config import JSONType
-import aiohttp
 import asyncio
 
+import aiohttp
+import requests
+from requests.exceptions import HTTPError
+
+from .config import JSONType
 
 
 async def fetch_data(endpoint: str, params: dict, page: int) -> JSONType:

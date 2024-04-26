@@ -1,7 +1,8 @@
 from unittest.mock import patch
+
+import aiohttp
 import pytest
 import requests
-import aiohttp
 from aiohttp.test_utils import make_mocked_coro
 
 from trash_nothing.src.api import fetch_data
@@ -11,7 +12,7 @@ from trash_nothing.src.api import fetch_data
 async def test_fetch_data_success(mock_server):
     # simulate server
     server = await mock_server
-    
+
     # assumed params for fetch_data
     endpoint = str(server.make_url("/"))
     params = {"param": "value"}
@@ -33,7 +34,6 @@ async def test_fetch_data_error(mock_server):
     endpoint = str(server.make_url("/error"))
     params = {"param": "value"}
     page = 3
-
 
     # check for error
     with pytest.raises(aiohttp.ClientResponseError):

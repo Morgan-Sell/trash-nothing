@@ -1,22 +1,17 @@
 import asyncio
-
-from config import (
-    API_URL, API_PARAMS, CSV_OUTPUT_PATH, NUM_CALLS
-)
-from api import fetch_data
-from data_processing import (
-    convert_json_to_trash_nothing_post,
-    initialize_csv_with_headers,
-    append_data_to_csv,
-)
-
 from pprint import pprint
+
+from api import fetch_data
+from config import API_PARAMS, API_URL, CSV_OUTPUT_PATH, NUM_CALLS
+from data_processing import (append_data_to_csv,
+                             convert_json_to_trash_nothing_post,
+                             initialize_csv_with_headers)
 
 
 async def main():
-    
+
     posts = []
-    
+
     # pull data from API and append to posts
     for idx in range(NUM_CALLS):
         await asyncio.sleep(1)
@@ -30,8 +25,8 @@ async def main():
             # if error, print error
             if isinstance(result, Exception):
                 print(result)
-            
-            else:        
+
+            else:
                 # transform JSON to dataclas
                 auction = convert_json_to_trash_nothing_post(result)
 
@@ -40,7 +35,7 @@ async def main():
 
                 # append new data to CSV
                 append_data_to_csv(CSV_OUTPUT_PATH, auction)
-        
+
 
 if __name__ == "__main__":
     asyncio.run(main())

@@ -1,6 +1,7 @@
-from typing import Any, Dict, List, Union
-from dotenv import load_dotenv
 import os
+from typing import Any, Dict, List, Union
+
+from dotenv import load_dotenv
 
 # obtain API key from .env file
 load_dotenv()
@@ -17,7 +18,7 @@ API_PARAMS = {
     "sort_by": "date",
     "types": "offer",
     "sources": "groups",
-    "group_ids": 4673, # DC ReUseIt group
+    "group_ids": 4673,  # DC ReUseIt group
     "per_page": 20,
     "page": 1,
 }

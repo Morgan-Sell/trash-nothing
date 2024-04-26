@@ -1,4 +1,5 @@
 from datetime import datetime
+
 import pytest
 
 from trash_nothing.src.models import TrashNothingPost
@@ -8,17 +9,17 @@ def test_trash_nothing_post_post_init(sample_trash_nothing_api_data):
     data = sample_trash_nothing_api_data()
 
     post = TrashNothingPost(
-        post_id=data['post_id'],
-        title=data['title'],
-        description=data['content'],
-        collection_days_times=data['collection_days_times'],
-        post_date=data['date'],
-        expiry_date=data['expiration'],
-        outcome=data['outcome'],
-        reply_measure=data['reply_measure'],
-        latitude=data['latitude'],
-        longitude=data['longitude'],
-        user_id=data['user_id'],
+        post_id=data["post_id"],
+        title=data["title"],
+        description=data["content"],
+        collection_days_times=data["collection_days_times"],
+        post_date=data["date"],
+        expiry_date=data["expiration"],
+        outcome=data["outcome"],
+        reply_measure=data["reply_measure"],
+        latitude=data["latitude"],
+        longitude=data["longitude"],
+        user_id=data["user_id"],
     )
 
     # test removal of commas

@@ -1,11 +1,12 @@
-from dataclasses import dataclass, fields
 import re
+from dataclasses import dataclass, fields
 from datetime import datetime
+
 
 @dataclass
 class TrashNothingPost:
     """
-    Represents a post made on the TrashNothing website. A website where people 
+    Represents a post made on the TrashNothing website. A website where people
     list used goods, so the products can find a second home.
 
     Attributes:
@@ -20,8 +21,9 @@ class TrashNothingPost:
     - latitude (float): Geographic latitude of where to pick up the used good.
     - longitude (float): Geographic longitude of where to pick up the used good.
     - user_id (int): Identifier of the user who made the post.
-    
+
     """
+
     post_id: int
     title: str
     description: str
@@ -34,16 +36,17 @@ class TrashNothingPost:
     longitude: float
     user_id: int
 
-
     def __post_init__(self):
         # remove commas from title because saving to CSV
         self.title = re.sub(",", "", self.title)
-        
+
         # clean description attribute
         self.description = self._remove_emojis(self.description)
         self.description = self._remove_newline_characters(self.description)
         self.description = self._remove_urls(self.description)
-        self.description = re.sub(",", "", self.description) # remoma comma because saving to CSV
+        self.description = re.sub(
+            ",", "", self.description
+        )  # remoma comma because saving to CSV
 
         # round latitude and longitude
         self.latitude = round(self.latitude, 1)
@@ -54,14 +57,11 @@ class TrashNothingPost:
         self.post_date = datetime.strptime(self.post_date, date_format)
         self.expiry_date = datetime.strptime(self.expiry_date, date_format)
 
-    
     def keys(self):
         return [field.name for field in fields(self)]
-    
 
     def values(self):
         return [getattr(self, field.name) for field in fields(self)]
-
 
     def _remove_emojis(self, text: str) -> str:
         """
@@ -71,9 +71,9 @@ class TrashNothingPost:
         - text (str): The string from which emojis will be removed.
 
         Returns:
-        - cleaned_text (str): The modified string with all emojis removed.   
+        - cleaned_text (str): The modified string with all emojis removed.
         """
-        
+
         # Regular expression pattern to match all emojis
         emoji_pattern = re.compile(
             "["
@@ -87,15 +87,14 @@ class TrashNothingPost:
             "\U0001FA00-\U0001FA6F"  # Chess Symbols
             "\U0001FA70-\U0001FAFF"  # Symbols and Pictographs Extended-A
             "\U00002702-\U000027B0"  # Dingbats
-            "\U000024C2-\U0001F251" 
+            "\U000024C2-\U0001F251"
             "]+",
-            flags=re.UNICODE
+            flags=re.UNICODE,
         )
 
         cleaned_text = emoji_pattern.sub(r"", text)
 
         return cleaned_text
-
 
     def _remove_newline_characters(self, text: str) -> str:
         """
@@ -108,13 +107,12 @@ class TrashNothingPost:
         - str: The modified string with all newline characters removed.
         """
         return text.replace("\n", "")
-    
 
     def _remove_urls(self, text: str) -> str:
         """
         Removes URLs from a given text string using a regular expression.
 
-        This method compiles a regex pattern that matches URLs beginning with 'http://', 'https://', 
+        This method compiles a regex pattern that matches URLs beginning with 'http://', 'https://',
         or 'www', and replaces them with an empty string.
 
         Parameters:
@@ -123,7 +121,7 @@ class TrashNothingPost:
         Returns:
         - cleaned_text (str): The string with all URLs removed.
         """
-        # This pattern matches most URLs that start with 
+        # This pattern matches most URLs that start with
         # http://, https://, or www and include typical URL characters
         url_pattern = r"https?://\S+|www\.\S+"
 
@@ -131,4 +129,3 @@ class TrashNothingPost:
         cleaned_text = re.sub(url_pattern, "", text)
 
         return cleaned_text
-    

@@ -1,14 +1,14 @@
 import csv
 import os
+from datetime import datetime
 from pprint import pprint
 from tempfile import NamedTemporaryFile, TemporaryDirectory
+
 import pytest
 
 from trash_nothing.src.data_processing import (
-    append_data_to_csv,
-    initialize_csv_with_headers,
-    convert_json_to_trash_nothing_post,
-)
+    append_data_to_csv, calc_days_between_dates,
+    convert_json_to_trash_nothing_post, initialize_csv_with_headers)
 from trash_nothing.src.models import TrashNothingPost
 
 from .conftest import MockTrashPost
@@ -44,7 +44,7 @@ def test_initialize_csv_does_not_overwrite_existing_file():
         with open(file_path, "w", newline="") as file:
             writer = csv.writer(file)
             writer.writerow(initial_data)
-        
+
         # call the function
         initialize_csv_with_headers(file_path, headers)
 
@@ -61,13 +61,13 @@ def test_append_data_csv():
         post1 = MockTrashPost(
             post_id=2,
             title="Half-empty Oaxacan Mezcal",
-            description="Imported from the Oaxacan mountains. Drank half of it with my dad.", 
+            description="Imported from the Oaxacan mountains. Drank half of it with my dad.",
             post_date="2003-10-14T09:03:15",
         )
         post2 = MockTrashPost(
             post_id=68,
             title="Dog-chewed baseball glove",
-            description="Wore the glove when making the winning catch for the little league world series.", 
+            description="Wore the glove when making the winning catch for the little league world series.",
             post_date="1999-12-25T18:37:25",
         )
 
@@ -81,13 +81,13 @@ def test_append_data_csv():
         pprint(lines)
         # check expected results
         assert lines[0].strip() == (
-            "2,Half-empty Oaxacan Mezcal," \
-            "Imported from the Oaxacan mountains. Drank half of it with my dad.," \
+            "2,Half-empty Oaxacan Mezcal,"
+            "Imported from the Oaxacan mountains. Drank half of it with my dad.,"
             "2003-10-14T09:03:15"
         )
         assert lines[1].strip() == (
-            "68,Dog-chewed baseball glove," \
-            "Wore the glove when making the winning catch for the little league world series.," \
+            "68,Dog-chewed baseball glove,"
+            "Wore the glove when making the winning catch for the little league world series.,"
             "1999-12-25T18:37:25"
         )
 
@@ -100,11 +100,11 @@ def test_convert_json_to_trash_nothing_post(sample_trash_nothing_api_data):
         post_id=43065400,
         title="Verticals blind replacement slats (West Riverside off 91 freeway)",
         description="31/2 inches wide by 82 inches long. Pecan colored vertical blind "
-            "replacement slats. Perfect condition. They don’t get along with "
-            "my cats!😂there are 27 of them.\n"
-            "\n"
-            "\n"
-            "https://trashnothing.com/pics/9FtxWkT",
+        "replacement slats. Perfect condition. They don’t get along with "
+        "my cats!😂there are 27 of them.\n"
+        "\n"
+        "\n"
+        "https://trashnothing.com/pics/9FtxWkT",
         collection_days_times="",
         post_date="2024-04-14T21:53:15",
         expiry_date="2024-07-13T21:53:15",
@@ -112,8 +112,17 @@ def test_convert_json_to_trash_nothing_post(sample_trash_nothing_api_data):
         reply_measure="low",
         latitude=33.92209325780915,
         longitude=-117.42453890783474,
-        user_id=9190382
+        user_id=9190382,
     )
 
     # check expected results
     assert post == expected_results
+
+
+def test_calc_days_between_dates():
+    dt1 = datetime(2024, 4, 26, 15, 30)
+    dt2 = datetime(2024, 5, 5, 11, 20)
+
+    days_diff = calc_days_between_dates(dt1, dt2)
+
+    assert days_diff == 8
