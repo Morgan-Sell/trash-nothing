@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from typing import Any, Dict, List, Union
 
 from dotenv import load_dotenv
@@ -9,6 +10,14 @@ api_key = os.getenv("API_KEY")
 
 # type aliases
 JSONType = Union[Dict[str, Any], List[Any]]
+
+# directory configuration
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = BASE_DIR / "data"
+IMG_DIR = BASE_DIR / "img"
+
+# file configuration
+CSV_OUTPUT_PATH = DATA_DIR / "trash_posts.csv"
 
 
 # API configuraiton
@@ -25,4 +34,4 @@ API_PARAMS = {
 NUM_CALLS = 3
 
 # Output file configuration
-CSV_OUTPUT_PATH = "/Users/morgan/Documents/16_ArjanCodes/next_level_python/trash_nothing/data/trash_posts.csv"
+
