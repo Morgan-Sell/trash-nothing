@@ -67,16 +67,17 @@ def sample_trash_nothing_api_data():
     return data
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 async def mock_server(aiohttp_server):
     """Fixture to create a mock response helper function"""
-    async def handler(request):
-        params = request.rel_url.query
-        if params.get("error") == "true":
-            return web.Response(status=404, text="Not Found")
-        return web.json_response(data={"key": "value"}, status=200)
+    async def hello(request):
+        page = request.rel_url.query.get("page")
+        if request.path == "/error":
+            raise web.HTTPNotFound(text="Not found")
+        return web.json_response(data={"message": "Hello", "page": page}, status=200)
     
-    app = app.Application()
-    app.router.add_get("/api", handler)
+    app = web.Application()
+    app.router.add_get("/", hello)
+    app.router.add_get("/server", hello)
     return await aiohttp_server(app)
  
