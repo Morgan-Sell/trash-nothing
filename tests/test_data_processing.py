@@ -4,11 +4,15 @@ from datetime import datetime
 from pprint import pprint
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 
+import numpy as np
 import pytest
 
 from trash_nothing.src.data_processing import (
-    append_data_to_csv, calc_days_between_dates,
-    convert_json_to_trash_nothing_post, initialize_csv_with_headers)
+    append_data_to_csv, 
+    convert_json_to_trash_nothing_post, 
+    initialize_csv_with_headers,
+    load_and_process_data,
+)
 from trash_nothing.src.models import TrashNothingPost
 
 from .conftest import MockTrashPost
@@ -119,10 +123,25 @@ def test_convert_json_to_trash_nothing_post(sample_trash_nothing_api_data):
     assert post == expected_results
 
 
-def test_calc_days_between_dates():
-    dt1 = datetime(2024, 4, 26, 15, 30)
-    dt2 = datetime(2024, 5, 5, 11, 20)
+def test_load_and_process_data(tmp_path, sample_dataset):
 
-    days_diff = calc_days_between_dates(dt1, dt2)
+    df = sample_dataset
 
-    assert days_diff == 8
+    # save dataframe to temporary path
+    temp_csv_path = tmp_path / "temp_data.csv"
+    df.to_csv(temp_csv_path, index=False) 
+    processed_data = load_and_process_data(
+        temp_csv_path, "post_date", "expiry_date"
+    )
+
+
+
+    # confirm 'days_available' column exists
+    assert "days_available_for_pickup" in processed_data.columns
+
+    # verify 'days_available_for_pickup' calculation
+    expected_total_days = np.sum(
+        (sample_dataset['expiry_date'] - sample_dataset['post_date']).dt.days
+    )
+
+    assert processed_data["days_available_for_pickup"].sum() == expected_total_days

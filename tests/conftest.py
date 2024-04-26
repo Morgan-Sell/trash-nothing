@@ -1,6 +1,7 @@
 from dataclasses import dataclass, fields
 from unittest.mock import AsyncMock
 
+import pandas as pd
 import pytest
 from aiohttp import web
 
@@ -83,3 +84,52 @@ async def mock_server(aiohttp_server):
     app.router.add_get("/", hello)
     app.router.add_get("/server", hello)
     return await aiohttp_server(app)
+
+
+@pytest.fixture(scope="module")
+def sample_dataset():
+    data = {
+        "post_id": [1, 2, 3, 4, 5],
+        "title": ["skateboard", "baseball", "kitchen sink", "guitar", "surfboard"],
+        "description": [
+            "wood with 4 wheels",
+            "white canvas and red stitch", 
+            "commercial size", 
+            "Played by BB King", 
+            "Float on water",
+        ],
+        "collection_days_times": [
+            "week nights",
+            "weekdays during lunch",
+            "Weekends between 1 and 5pm",
+            "Sundays only",
+            "First Friday of the month",
+        ],
+        "post_date": [
+            "2024-04-25 17:15:02",
+            "2024-01-31 15:15:02",
+            "2024-02-14 10:15:01",
+            "2024-01-01 18:15:03",
+            "2024-03-02 08:16:44",
+        ],
+        "expiry_date": [
+            "2024-05-25 01:16:05",
+            "2024-03-02 20:44:05",
+            "2024-02-28 11:22:09",
+            "2024-04-25 14:51:05",
+            "2024-07-25 08:33:06",
+        ],
+        "outcome": ["taken", "promised", "promised", "taken", ""],
+        "reply_measure": ["high", "low", "medium", "low", "high"],
+        "latitude": [34.4, 39.0, 37.4, 38.7, 39.1],
+        "longitude": [-84.2, -34.3, -100.1, -101.3, 50.1],
+        "user_id": [3456, 1234, 6523, 33, 1983],
+    }
+    
+    df = pd.DataFrame(data)
+
+    # transform to datetime objects
+    df["post_date"] = pd.to_datetime(df["post_date"])
+    df["expiry_date"] = pd.to_datetime(df["expiry_date"])
+
+    return df
