@@ -8,8 +8,11 @@ import numpy as np
 import pytest
 
 from trash_nothing.src.data_processing import (
-    append_data_to_csv, convert_json_to_trash_nothing_post,
-    initialize_csv_with_headers, load_and_process_data)
+    append_data_to_csv,
+    convert_json_to_trash_nothing_post,
+    initialize_csv_with_headers,
+    load_and_process_data,
+)
 from trash_nothing.src.models import TrashNothingPost
 
 from .conftest import MockTrashPost

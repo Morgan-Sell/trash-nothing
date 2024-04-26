@@ -76,7 +76,9 @@ def convert_json_to_trash_nothing_post(data: JSONType) -> TrashNothingPost:
     return post
 
 
-def load_and_process_data(data: pd.DataFrame, start_date_var: str, end_date_var: str) -> pd.DataFrame:
+def load_and_process_data(
+    data: pd.DataFrame, start_date_var: str, end_date_var: str
+) -> pd.DataFrame:
     df = pd.read_csv(data)
 
     # transform to datetime objects
@@ -87,4 +89,3 @@ def load_and_process_data(data: pd.DataFrame, start_date_var: str, end_date_var:
     df["days_available_for_pickup"] = (df[end_date_var] - df[start_date_var]).dt.days
 
     return df
-

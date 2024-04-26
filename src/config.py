@@ -34,4 +34,3 @@ API_PARAMS = {
 NUM_CALLS = 3
 
 # Output file configuration
-

@@ -5,7 +5,7 @@ from config import API_PARAMS, API_URL, CSV_OUTPUT_PATH, IMG_DIR, NUM_CALLS
 from data_processing import (
     append_data_to_csv,
     convert_json_to_trash_nothing_post,
-    initialize_csv_with_headers, 
+    initialize_csv_with_headers,
     load_and_process_data,
 )
 
@@ -14,6 +14,7 @@ from PIL import Image
 import streamlit as st
 import plotly.express as px
 from visualization import create_histogram
+
 
 async def main():
 
@@ -33,7 +34,7 @@ async def main():
             if isinstance(result, Exception):
                 print(result)
                 st.error(f"Error: {result}")
-                
+
             else:
                 # transform JSON to dataclas
                 auction = convert_json_to_trash_nothing_post(result)
@@ -44,7 +45,6 @@ async def main():
                 # append new data to CSV
                 append_data_to_csv(CSV_OUTPUT_PATH, auction)
 
-    
     # Create dashboard with visualizations
 
     # TODO: Make path relative
@@ -53,17 +53,20 @@ async def main():
         page_title="Trash Nothing Dashboard",
         page_icon=im,
         layout="wide",
-        initial_sidebar_state="expanded"
+        initial_sidebar_state="expanded",
     )
 
     # TODO: Make path relative
     df = load_and_process_data(CSV_OUTPUT_PATH, "post_date", "epiry_date")
 
     # create histogram
-    fig = create_histogram(df["days_available_for_pickup"], title="Days Available for Pickup Distribution")
+    fig = create_histogram(
+        df["days_available_for_pickup"], title="Days Available for Pickup Distribution"
+    )
 
     # display figure
     st.plotly_chart(fig)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
