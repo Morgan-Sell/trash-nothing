@@ -47,14 +47,31 @@ async def main():
 
     ### -- Create dashboard with visualizations -- ###
 
-    # setup dashboard configuration
+    # set page layout
     im = Image.open(IMG_DIR / "recycle.png")
     st.set_page_config(
         page_title="Trash Nothing Dashboard",
         page_icon=im,
-        layout="centered",
+        layout="wide",
         initial_sidebar_state="auto",
     )
+    
+    # Set the title and banner image
+    im2 = Image.open(IMG_DIR / "garden_v2.png")
+    st.image(im2, use_column_width=True)
+    st.markdown("""
+        <style>
+        .title {
+            font-family: 'Helvetica';
+            color: #ff6347;
+            font-size: 48px;
+            text-algin: center;         
+        }
+        </style>
+        <h1 class="title">♻️Trash Nothing Dashboard♻️</h1>
+        """, unsafe_allow_html=True
+    )
+
 
     # read and process dataset
     df = load_and_process_data(CSV_OUTPUT_PATH, "post_date", "expiry_date")
