@@ -133,9 +133,8 @@ class TrashNothingPost:
 
         return cleaned_text
 
-
     def _modify_outcome(self, text: str) -> str:
-        if text == "":
-            return "No Pickup"
+        if text is None or text.strip() == "":
+            return "no pickup"
         else:
             return text
