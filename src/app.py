@@ -13,7 +13,7 @@ from PIL import Image
 
 import streamlit as st
 import plotly.express as px
-from visualization import create_histogram
+from visualization import create_countplot, create_histogram
 
 
 async def main():
@@ -45,9 +45,10 @@ async def main():
                 # append new data to CSV
                 append_data_to_csv(CSV_OUTPUT_PATH, auction)
 
-    # Create dashboard with visualizations
-
-    # TODO: Make path relative
+    
+    ### -- Create dashboard with visualizations -- ###
+    
+    # setup dashboard configuration
     im = Image.open(IMG_DIR / "recycle.png")
     st.set_page_config(
         page_title="Trash Nothing Dashboard",
@@ -56,16 +57,25 @@ async def main():
         initial_sidebar_state="expanded",
     )
 
-    # TODO: Make path relative
-    df = load_and_process_data(CSV_OUTPUT_PATH, "post_date", "epiry_date")
+    # read and process dataset
+    df = load_and_process_data(CSV_OUTPUT_PATH, "post_date", "expiry_date")
 
-    # create histogram
-    fig = create_histogram(
+    # create distribution of # of days that an item is available for pickup
+    pickup_days_fig = create_histogram(
         df["days_available_for_pickup"], title="Days Available for Pickup Distribution"
     )
 
-    # display figure
-    st.plotly_chart(fig)
+    # create a count plot for 'outcome'
+    outcome_fig = create_countplot(df, variable="outcome", title="Trash Post Outcome")
+
+    # create a count plot showing the level of interest
+    interest_fig = create_countplot(df, variable="reply_measure", title="Level of Interest in Trash")
+
+    # display figures
+    st.plotly_chart(pickup_days_fig)
+    st.plotly_chart(outcome_fig)
+    st.plotly_chart(interest_fig)
+
 
 
 if __name__ == "__main__":
