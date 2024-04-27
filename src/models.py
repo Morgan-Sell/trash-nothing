@@ -57,6 +57,9 @@ class TrashNothingPost:
         self.post_date = datetime.strptime(self.post_date, date_format)
         self.expiry_date = datetime.strptime(self.expiry_date, date_format)
 
+        # if 'outcome' is blank change value to 'No Pickup'
+        self.outcome = self._modify_outcome(self.outcome)
+
     def keys(self):
         return [field.name for field in fields(self)]
 
@@ -129,3 +132,10 @@ class TrashNothingPost:
         cleaned_text = re.sub(url_pattern, "", text)
 
         return cleaned_text
+
+
+    def _modify_outcome(self, text: str) -> str:
+        if text == "":
+            return "No Pickup"
+        else:
+            return text

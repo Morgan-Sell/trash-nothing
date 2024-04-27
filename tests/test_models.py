@@ -6,7 +6,7 @@ from trash_nothing.src.models import TrashNothingPost
 
 
 def test_trash_nothing_post_post_init(sample_trash_nothing_api_data):
-    data = sample_trash_nothing_api_data()
+    data = sample_trash_nothing_api_data
 
     post = TrashNothingPost(
         post_id=data["post_id"],
@@ -42,3 +42,6 @@ def test_trash_nothing_post_post_init(sample_trash_nothing_api_data):
 
     # test emojis are removed
     assert "😂" not in post.description
+
+    # test outcome was updated
+    assert post.outcome == "No Pickup"
