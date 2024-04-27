@@ -31,6 +31,6 @@ API_PARAMS = {
     "per_page": 20,
     "page": 1,
 }
-NUM_CALLS = 3
+NUM_CALLS = 5
 
 # Output file configuration

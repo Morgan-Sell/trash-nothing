@@ -45,16 +45,15 @@ async def main():
                 # append new data to CSV
                 append_data_to_csv(CSV_OUTPUT_PATH, auction)
 
-    
     ### -- Create dashboard with visualizations -- ###
-    
+
     # setup dashboard configuration
     im = Image.open(IMG_DIR / "recycle.png")
     st.set_page_config(
         page_title="Trash Nothing Dashboard",
         page_icon=im,
-        layout="wide",
-        initial_sidebar_state="expanded",
+        layout="centered",
+        initial_sidebar_state="auto",
     )
 
     # read and process dataset
@@ -62,20 +61,35 @@ async def main():
 
     # create distribution of # of days that an item is available for pickup
     pickup_days_fig = create_histogram(
-        df["days_available_for_pickup"], title="Days Available for Pickup Distribution"
+        df,
+        variable="days_available_for_pickup",
+        title="Days Available for Pickup",
+        xaxis="Days Available",
+        yaxis="Frequency",
     )
 
     # create a count plot for 'outcome'
-    outcome_fig = create_countplot(df, variable="outcome", title="Trash Post Outcome")
+    outcome_fig = create_countplot(
+        df,
+        variable="outcome",
+        title="Trash Post Outcome",
+        xaxis="Outcome",
+        yaxis="Frequency",
+    )
 
     # create a count plot showing the level of interest
-    interest_fig = create_countplot(df, variable="reply_measure", title="Level of Interest in Trash")
+    interest_fig = create_countplot(
+        df,
+        variable="reply_measure",
+        title="Level of Interest in Trash",
+        xaxis="Outcome",
+        yaxis="Frequency",
+    )
 
     # display figures
     st.plotly_chart(pickup_days_fig)
     st.plotly_chart(outcome_fig)
     st.plotly_chart(interest_fig)
-
 
 
 if __name__ == "__main__":
