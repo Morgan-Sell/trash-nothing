@@ -72,6 +72,8 @@ async def main():
         """, unsafe_allow_html=True
     )
 
+    #
+    st.write("Data and text analyses of the posts offering free used goods on trashnothing.com.")
 
     # read and process dataset
     df = load_and_process_data(CSV_OUTPUT_PATH, "post_date", "expiry_date")
