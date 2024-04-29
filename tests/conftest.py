@@ -1,5 +1,4 @@
 from dataclasses import dataclass, fields
-from unittest.mock import AsyncMock
 
 import pandas as pd
 import pytest
@@ -24,7 +23,8 @@ def sample_trash_post():
     trash_post = TrashNothingPost(
         post_id=1,
         title="Flying skateboard",
-        description="Max speed is 90 mph. Has built in solar panel for charging.",
+        description="Max speed is 90 mph. Has built in solar panel \
+            for charging.",
         collection_days_times="Weekends between 1 and 5pm",
         post_date="2024-04-14T21:38:25",
         expiry_date="2024-07-13T21:38:25",
@@ -42,12 +42,10 @@ def sample_trash_post():
 def sample_trash_nothing_api_data():
     data = {
         "collection_days_times": "",
-        "content": "31/2 inches wide by 82 inches long. Pecan colored vertical blind "
-        "replacement slats. Perfect condition. They don’t get along with "
-        "my cats!😂there are 27 of them.\n"
-        "\n"
-        "\n"
-        "https://trashnothing.com/pics/9FtxWkT",
+        "content": "31/2 inches wide by 82 inches long. Pecan colored \
+            vertical blind replacement slats. Perfect condition. They \
+            don’t get along with my cats!😂there are 27 of them.\n\n\n \
+            https://trashnothing.com/pics/9FtxWkT",
         "date": "2024-04-14T21:53:15",
         "expiration": "2024-07-13T21:53:15",
         "footer": "",
@@ -62,9 +60,11 @@ def sample_trash_nothing_api_data():
         "repost_count": 0,
         "reselling": None,
         "source": "trashnothing",
-        "title": "Verticals blind replacement slats (West Riverside off 91 freeway)",
+        "title": "Verticals blind replacement slats (West Riverside \
+            off 91 freeway)",
         "type": "offer",
-        "url": "https://trashnothing.com/post/43065400/verticals-blind-replacement-slats-west-riverside-off-91-freeway",
+        "url": "https://trashnothing.com/post/43065400/verticals-blind- \
+            replacement-slats-west-riverside-off-91-freeway",
         "user_id": 9190382,
     }
     return data
@@ -78,7 +78,9 @@ async def mock_server(aiohttp_server):
         page = request.rel_url.query.get("page")
         if request.path == "/error":
             raise web.HTTPNotFound(text="Not found")
-        return web.json_response(data={"message": "Hello", "page": page}, status=200)
+        return web.json_response(
+            data={"message": "Hello", "page": page}, status=200
+        )
 
     app = web.Application()
     app.router.add_get("/", hello)
@@ -90,7 +92,9 @@ async def mock_server(aiohttp_server):
 def sample_dataset():
     data = {
         "post_id": [1, 2, 3, 4, 5],
-        "title": ["skateboard", "baseball", "kitchen sink", "guitar", "surfboard"],
+        "title": [
+            "skateboard", "baseball", "kitchen sink", "guitar", "surfboard"
+        ],
         "description": [
             "wood with 4 wheels",
             "white canvas and red stitch",

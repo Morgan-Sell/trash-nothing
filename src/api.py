@@ -1,18 +1,17 @@
-import asyncio
-
 import aiohttp
-from requests.exceptions import HTTPError
 
 from config import JSONType
 
 
 async def fetch_data(endpoint: str, params: dict, page: int) -> JSONType:
     """
-    Asynchronously fetches data from a specified endpoint with given parameters.
+    Asynchronously fetches data from a specified endpoint with given
+    parameters.
 
-    This function initializes an asynchronous HTTP session and sends a GET request to
-    the provided endpoint. It includes support for pagination through the 'page' parameter.
-    It returns the JSON response if the HTTP status code is 200.
+    This function initializes an asynchronous HTTP session and sends a GET
+    request to the provided endpoint. It includes support for pagination
+    through the 'page' parameter. It returns the JSON response if the HTTP
+    status code is 200.
 
     Parameters:
     - endpoint (str): The URL of the API endpoint to send the request to.
@@ -20,7 +19,8 @@ async def fetch_data(endpoint: str, params: dict, page: int) -> JSONType:
     - page (int): The page number to be requested, used for pagination.
 
     Returns:
-    - JSONType: A JSON object containing the response data if the request is successful.
+    - JSONType: A JSON object containing the response data if the request
+      is successful.
 
     Raises:
     - ClientResponseError: If the response status is not 200, the function will

@@ -6,20 +6,24 @@ from datetime import datetime
 @dataclass
 class TrashNothingPost:
     """
-    Represents a post made on the TrashNothing website. A website where people
-    list used goods, so the products can find a second home.
+    Represents a post made on the TrashNothing website. A website where
+    people list used goods, so the products can find a second home.
 
     Attributes:
     - post_id (int): Unique identifier for the post.
-    - title (str): Title of the TrashNothing post, describing what is being offered.
+    - title (str): Title of the TrashNothing post, describing what is
+      being offered.
     - description (str): Detailed description of the offer.
-    - collection_days_times (str): Information about when the used good can be collected.
+    - collection_days_times (str): Information about when the used good
+      can be collected.
     - post_date (str): The date when the post was made.
     - expiry_date (str): The date when the offer expires.
     - outcome (str): Outcome of the post, e.g., 'Collected', 'Available'.
     - reply_measure (str): Level of interest, e.g., 'low', 'high'.
-    - latitude (float): Geographic latitude of where to pick up the used good.
-    - longitude (float): Geographic longitude of where to pick up the used good.
+    - latitude (float): Geographic latitude of where to pick up the
+      used good.
+    - longitude (float): Geographic longitude of where to pick up the
+      used good.
     - user_id (int): Identifier of the user who made the post.
 
     """
@@ -104,7 +108,8 @@ class TrashNothingPost:
         Removes all newline characters, "\n" from a given string.
 
         Parameters:
-        - text (str): The string from which newline characters are to be removed.
+        - text (str): The string from which newline characters
+          are to be removed.
 
         Returns:
         - str: The modified string with all newline characters removed.
@@ -115,8 +120,9 @@ class TrashNothingPost:
         """
         Removes URLs from a given text string using a regular expression.
 
-        This method compiles a regex pattern that matches URLs beginning with 'http://', 'https://',
-        or 'www', and replaces them with an empty string.
+        This method compiles a regex pattern that matches URLs
+        beginning with 'http://', 'https://', or 'www', and replaces
+        them with an empty string.
 
         Parameters:
         - text (str): The string from which URLs will be removed.

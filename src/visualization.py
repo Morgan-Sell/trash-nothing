@@ -14,13 +14,15 @@ def create_histogram(
 
     Parameters:
     - data (pd.DataFrame): The DataFrame containing the data to be plotted.
-    - variable (str): The column name in `data` to be used for the histogram's x-values.
+    - variable (str): The column name in `data` to be used for the
+      histogram's x-values.
     - title (str): The title of the histogram.
     - xaxis (str): The label for the x-axis.
     - yaxis (str): The label for the y-axis.
 
     Returns:
-    - plotly.graph_objs._figure.Figure: A Plotly Figure object representing the histogram.
+    - plotly.graph_objs._figure.Figure: A Plotly Figure object representing
+      the histogram.
     """
 
     fig = px.histogram(data, x=variable)
@@ -57,9 +59,10 @@ def create_countplot(
     - yaxis (str): Y-axis label.
 
     Returns:
-    - plotly.graph_objs._figure.Figure: A Plotly Figure object of the histogram.
+    - plotly.graph_objs._figure.Figure: A Plotly Figure object
+      of the histogram.
     """
-    
+
     fig = px.histogram(data, x=variable, text_auto=True)
 
     # format figure
@@ -103,5 +106,5 @@ def create_word_cloud(text: str) -> plt_figure:
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.imshow(wordcloud, interpolation="bilinear")
     ax.axis("off")
-    
+
     return fig

@@ -1,12 +1,8 @@
 import csv
 import os
-from datetime import datetime
-from pprint import pprint
 from tempfile import NamedTemporaryFile, TemporaryDirectory
 
 import numpy as np
-import pytest
-
 
 from trash_nothing.src.data_processing import (
     append_data_to_csv,
@@ -67,13 +63,15 @@ def test_append_data_csv():
         post1 = MockTrashPost(
             post_id=2,
             title="Half-empty Oaxacan Mezcal",
-            description="Imported from the Oaxacan mountains. Drank half of it with my dad.",
+            description="Imported from the Oaxacan mountains. \
+                Drank half of it with my dad.",
             post_date="2003-10-14T09:03:15",
         )
         post2 = MockTrashPost(
             post_id=68,
             title="Dog-chewed baseball glove",
-            description="Wore the glove when making the winning catch for the little league world series.",
+            description="Wore the glove when making the winning \
+                catch for the little league world series.",
             post_date="1999-12-25T18:37:25",
         )
 
@@ -84,16 +82,17 @@ def test_append_data_csv():
         # read data
         tmp.seek(0)
         lines = tmp.readlines()
-        pprint(lines)
+
         # check expected results
         assert lines[0].strip() == (
             "2,Half-empty Oaxacan Mezcal,"
-            "Imported from the Oaxacan mountains. Drank half of it with my dad.,"
-            "2003-10-14T09:03:15"
+            "Imported from the Oaxacan mountains. Drank half"
+            "of it with my dad.,2003-10-14T09:03:15"
         )
         assert lines[1].strip() == (
             "68,Dog-chewed baseball glove,"
-            "Wore the glove when making the winning catch for the little league world series.,"
+            "Wore the glove when making the winning catch "
+            "for the little league world series.,"
             "1999-12-25T18:37:25"
         )
 

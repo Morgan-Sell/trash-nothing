@@ -1,9 +1,5 @@
-from unittest.mock import patch
-
 import aiohttp
 import pytest
-import requests
-from aiohttp.test_utils import make_mocked_coro
 
 from trash_nothing.src.api import fetch_data
 

@@ -50,7 +50,7 @@ async def main():
                 # append new data to CSV
                 append_data_to_csv(CSV_OUTPUT_PATH, auction)
 
-    ### -- Create dashboard with visualizations -- ###
+    # <-- Create dashboard with visualizations -->
 
     # set page layout
     im = Image.open(IMG_DIR / "recycle.png")
@@ -60,25 +60,30 @@ async def main():
         layout="wide",
         initial_sidebar_state="auto",
     )
-    
+
     # Set the title and banner image
-    im2 = Image.open(IMG_DIR / "garden_v2.png")
+    im2 = Image.open(IMG_DIR / "garden.png")
     st.image(im2, use_column_width=True)
-    st.markdown("""
+    st.markdown(
+        """
         <style>
         .title {
             font-family: 'Helvetica';
             color: #ff6347;
             font-size: 48px;
-            text-algin: center;         
+            text-algin: center;
         }
         </style>
         <h1 class="title">♻️Trash Nothing Dashboard♻️</h1>
-        """, unsafe_allow_html=True
+        """,
+        unsafe_allow_html=True,
     )
 
     #
-    st.write("Data and text analyses of the posts offering free used goods on trashnothing.com.")
+    st.write(
+        "Data and text analyses of the posts offering free used goods \
+        on trashnothing.com."
+    )
 
     # read and process dataset
     df = load_and_process_data(CSV_OUTPUT_PATH, "post_date", "expiry_date")
@@ -87,8 +92,11 @@ async def main():
     descriptions_merged = combine_text(df, "description")
     word_cloud_fig = create_word_cloud(descriptions_merged)
     st.pyplot(word_cloud_fig)
-    st.write(f"There are a total of {len(descriptions_merged.split())} words in all the descriptions.")
-    
+    st.write(
+        f"There are a total of {len(descriptions_merged.split())} words \
+        in all the descriptions."
+    )
+
     # create distribution of # of days that an item is available for pickup
     pickup_days_fig = create_histogram(
         df,
