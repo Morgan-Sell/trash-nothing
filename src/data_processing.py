@@ -83,6 +83,19 @@ def convert_json_to_trash_nothing_post(data: JSONType) -> TrashNothingPost:
 def load_and_process_data(
     data: pd.DataFrame, start_date_var: str, end_date_var: str
 ) -> pd.DataFrame:
+    """
+    Loads a dataset from a CSV file and processes the date columns.
+
+    Parameters:
+    - data (pd.DataFrame): The path to the CSV file to be loaded as a DataFrame.
+    - start_date_var (str): The name of the column in `data` that contains the start dates.
+    - end_date_var (str): The name of the column in `data` that contains the end dates.
+
+    Returns:
+    - df (pd.DataFrame): A DataFrame with the original data, where the `start_date_var` and `end_date_var`
+      have been converted to datetime objects and a new column `days_available_for_pickup` has been added,
+      which contains the number of days between `start_date_var` and `end_date_var`.
+    """
     df = pd.read_csv(data)
 
     # transform to datetime objects
@@ -96,4 +109,16 @@ def load_and_process_data(
 
 
 def combine_text(data: pd.DataFrame, variable: str) -> str:
+    """
+    Concatenate all text elements from a specified column in a DataFrame into a single string.
+
+    Parameters:
+    - data (pd.DataFrame): The DataFrame containing the text data to combine.
+    - variable (str): The name of the column in `data` from which to aggregate the text.
+
+    Returns:
+    - str: A single string consisting of all text elements from the specified column
+      in the DataFrame concatenated together, separated by spaces.
+    """
+
     return " ".join(words for words in data[variable])
