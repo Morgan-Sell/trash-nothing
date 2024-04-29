@@ -1,5 +1,6 @@
 import asyncio
 
+
 from api import fetch_data
 from config import API_PARAMS, API_URL, CSV_OUTPUT_PATH, IMG_DIR, NUM_CALLS
 from data_processing import (
@@ -7,13 +8,17 @@ from data_processing import (
     convert_json_to_trash_nothing_post,
     initialize_csv_with_headers,
     load_and_process_data,
+    combine_text,
 )
 
 from PIL import Image
 
 import streamlit as st
-import plotly.express as px
-from visualization import create_countplot, create_histogram
+from visualization import (
+    create_countplot,
+    create_histogram,
+    create_word_cloud,
+)
 
 
 async def main():
@@ -78,6 +83,12 @@ async def main():
     # read and process dataset
     df = load_and_process_data(CSV_OUTPUT_PATH, "post_date", "expiry_date")
 
+    # create word cloud
+    descriptions_merged = combine_text(df, "description")
+    word_cloud_fig = create_word_cloud(descriptions_merged)
+    st.pyplot(word_cloud_fig)
+    st.write(f"There are a total of {len(descriptions_merged.split())} words in all the descriptions.")
+    
     # create distribution of # of days that an item is available for pickup
     pickup_days_fig = create_histogram(
         df,

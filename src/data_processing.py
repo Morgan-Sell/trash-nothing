@@ -23,7 +23,11 @@ def initialize_csv_with_headers(file_path: str, headers: list) -> None:
     Raises:
     - IOError: An error occurred when attempting to write to the file.
     """
+    # create the directory it is does not exist
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    
     if not os.path.exists(file_path):
+        # create and open the file for writing
         with open(file_path, "w", newline="") as file:
             writer = csv.writer(file)
             writer.writerow(headers)
