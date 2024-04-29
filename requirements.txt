@@ -13,3 +13,4 @@ pytest-mock
 pytest-aiohttp
 plotly.express
 altair
+wordcloud

@@ -89,3 +89,7 @@ def load_and_process_data(
     df["days_available_for_pickup"] = (df[end_date_var] - df[start_date_var]).dt.days
 
     return df
+
+
+def combine_text(data: pd.DataFrame, variable: str) -> str:
+    return " ".join(words for words in data[variable])

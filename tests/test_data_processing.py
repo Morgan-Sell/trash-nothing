@@ -7,11 +7,13 @@ from tempfile import NamedTemporaryFile, TemporaryDirectory
 import numpy as np
 import pytest
 
+
 from trash_nothing.src.data_processing import (
     append_data_to_csv,
     convert_json_to_trash_nothing_post,
     initialize_csv_with_headers,
     load_and_process_data,
+    combine_text,
 )
 from trash_nothing.src.models import TrashNothingPost
 
@@ -141,3 +143,10 @@ def test_load_and_process_data(tmp_path, sample_dataset):
     )
 
     assert processed_data["days_available_for_pickup"].sum() == expected_total_days
+
+
+def test_combine_text(sample_dataset):
+    expected_result = "skateboard baseball kitchen sink guitar surfboard"
+    result = combine_text(sample_dataset, "title")
+
+    assert result == expected_result
