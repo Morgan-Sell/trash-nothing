@@ -15,7 +15,10 @@ Here are a few sample visualizations from the Trash Nothing dashboard.
 
 In the below word cloud, we see the words that are most used in the post descriptions. Understandably, the primary words correspond to (1) coordination/exchange guidelines, e.g., policy, offer, pick up, and (2) general product descriptions, e.g., good condition, old, and size.
 
-![Post Description Word Cloud](img/wordcloud.png)
+<p align="center">
+    <img src="img/wordcloud.png" alt="Posts Description Word Cloud">
+</p>
+
 
 The below count plot shows the number of items that are still available or have been promised to an individual. This visualization is misleading because it does not show the items that were taken. Once an item is taken, the users remove it from the site.
 
