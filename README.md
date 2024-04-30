@@ -22,11 +22,18 @@ In the below word cloud, we see the words that are most used in the post descrip
 
 The below count plot shows the number of items that are still available or have been promised to an individual. This visualization is misleading because it does not show the items that were taken. Once an item is taken, the users remove it from the site.
 
-![Outcome Distribution](img/outcome.png)
+
+<p align="center">
+    <img src="img/outcome.png" alt="Outcome Distribution">
+</p>
+
 
 Another interesting observation is how long do people make their items available pickup. We nearly see a binomial distribution with the apexes at 10 - 20 days and 80 - 90 days. We are unsure of the default settings. The 3 month duration may be caused by default bias.
 
-![Days Available](img/days_available.png)
+
+<p align="center">
+    <img src="img/days_available.png" alt="Days Available">
+</p>
 
 
 ## Project Structure
