@@ -84,6 +84,9 @@ TRASH_NOTHING/
 - `tests/`: Contains unit tests for testing the source code.
 - `world-pop-env/`: Python virtual environment for managing dependencies.
 
+## Project Inspiration
+I developed the Trash Nothing dashboard as a final project for [ArjanCodes Next-Level Python](https://www.arjancodes.com/courses/nlp/). My goal for the project was to implement Python's dataclass and concurrent programming.
+
 ## Packages
 - pandas
 - streamlit
