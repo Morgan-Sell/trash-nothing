@@ -2,7 +2,14 @@ import asyncio
 
 
 from api import fetch_data
-from config import API_PARAMS, API_URL, CSV_OUTPUT_PATH, IMG_DIR, NUM_CALLS
+from config import (
+    API_PARAMS,
+    API_URL,
+    CSV_OUTPUT_PATH,
+    IMG_DIR,
+    NUM_CALLS,
+    START_PAGE,
+)
 from data_processing import (
     append_data_to_csv,
     convert_json_to_trash_nothing_post,
@@ -26,9 +33,9 @@ async def main():
     posts = []
 
     # pull data from API and append to posts
-    for idx in range(NUM_CALLS):
+    for page_idx in range(START_PAGE, START_PAGE + NUM_CALLS):
         await asyncio.sleep(1)
-        task = fetch_data(API_URL, API_PARAMS, idx + 1)
+        task = fetch_data(API_URL, API_PARAMS, page_idx)
         posts.append(task)
 
     results = await asyncio.gather(*posts, return_exceptions=True)

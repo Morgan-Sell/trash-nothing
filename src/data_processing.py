@@ -135,4 +135,4 @@ def combine_text(data: pd.DataFrame, variable: str) -> str:
       together, separated by spaces.
     """
 
-    return " ".join(words for words in data[variable])
+    return " ".join(str(words) for words in data[variable])

@@ -141,6 +141,6 @@ class TrashNothingPost:
 
     def _modify_outcome(self, text: str) -> str:
         if text is None or text.strip() == "":
-            return "no pickup"
+            return "available"
         else:
             return text

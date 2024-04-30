@@ -3,7 +3,6 @@ black
 pandas
 isort
 requests_mock
-requests
 streamlit
 python-dotenv
 setuptools

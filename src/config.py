@@ -32,5 +32,6 @@ API_PARAMS = {
     "page": 1,
 }
 NUM_CALLS = 5
+START_PAGE = 6
 
 # Output file configuration

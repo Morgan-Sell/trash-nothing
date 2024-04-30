@@ -44,4 +44,4 @@ def test_trash_nothing_post_post_init(sample_trash_nothing_api_data):
     assert "😂" not in post.description
 
     # test outcome was updated
-    assert post.outcome == "no pickup"
+    assert post.outcome == "available"
