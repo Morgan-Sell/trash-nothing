@@ -33,6 +33,10 @@ Follow these steps to install and use the Trash Nothing Dashboard:
    API_KEY=your_api_key_here
     ```
 5. **Save and Close**: Save the `.env` file and close it.
+   
+6. **Gain Access to Groups Data**: To access group data, which provides a much richer dataset, you must join a TrashNothing group. Once you join the group, ask the group administrator for the group ID. You can join more than one group.
+   
+7. **Update Config File**: When you obtain the group ID(s), update the `group_ids` key in the `API_PARAMS` on the `config.py` file. Currently, the group ID is `4673`, which corresponds to the DC ReUse It group.
 
 ## Dashboard Samples
 
