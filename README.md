@@ -18,8 +18,6 @@ Follow these steps to install and use the Trash Nothing Dashboard:
     git clone https://github.com/Morgan-Sell/trash-nothing.git
     ```
 
-    <button onclick="navigator.clipboard.writeText(`git clone https://github.com/Morgan-Sell/trash-nothing.git`);">Copy</button>
-
 2. **Install Dependencies**: Navigate into the project directory and install the required dependencies using pip:
 
     ```bash
@@ -27,20 +25,14 @@ Follow these steps to install and use the Trash Nothing Dashboard:
     pip install -r requirements.txt
     ```
 
-    <button onclick="navigator.clipboard.writeText(`cd trash-nothing\npip install -r requirements.txt`);">Copy</button>
-
 3. **Set Up API Key**: You'll need an API key from Trash Nothing to access their API. If you don't have one already, sign up for an account on [Trash Nothing](https://www.trashnothing.com) and generate an API key.
 
 4. **Configure API Key**: Once you have your API key, create a `.env` file in the root directory of the project. Add your API key to this file in the following format:
 
     ```plaintext
-    API_KEY=your_api_key_here
+   API_KEY=your_api_key_here
     ```
-
-    <button onclick="navigator.clipboard.writeText(`API_KEY=your_api_key_here`);">Copy</button>
-
 5. **Save and Close**: Save the `.env` file and close it.
-
 
 ## Dashboard Samples
 
