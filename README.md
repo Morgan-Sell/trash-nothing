@@ -1,6 +1,6 @@
 ![Garden created from trash](img/garden.png)
 
-# Trash Post Dashboard: Life Trends of Second-Hand Goods
+# Trash Nothing Dashboard: Life Trends of Second-Hand Goods
 
 ## Project Overview
 This project asynchronously retrieves data from [Trash Nothing](https://trashnothing.com/beta/browse?r=logo) API then leverages Python's dataclass
@@ -8,6 +8,39 @@ to process and store the data in a CSV file. Once the data is saved, the applica
 application then generates a dashboard that provides both numerical and text analyses.
 
 TrashPost is a website in which people offer second-hand goods to others, predominantly for free. A post includes a title, description, day/time available for pickup, location, and more. A post also includes whether the item was picked up.
+
+## Installation
+Follow these steps to install and use the Trash Nothing Dashboard:
+
+1. **Clone the Repository**: Start by cloning this repository to your local machine:
+   
+    ```bash
+    git clone https://github.com/Morgan-Sell/trash-nothing.git
+    ```
+
+    <button onclick="navigator.clipboard.writeText(`git clone https://github.com/Morgan-Sell/trash-nothing.git`);">Copy</button>
+
+2. **Install Dependencies**: Navigate into the project directory and install the required dependencies using pip:
+
+    ```bash
+    cd trash-nothing
+    pip install -r requirements.txt
+    ```
+
+    <button onclick="navigator.clipboard.writeText(`cd trash-nothing\npip install -r requirements.txt`);">Copy</button>
+
+3. **Set Up API Key**: You'll need an API key from Trash Nothing to access their API. If you don't have one already, sign up for an account on [Trash Nothing](https://www.trashnothing.com) and generate an API key.
+
+4. **Configure API Key**: Once you have your API key, create a `.env` file in the root directory of the project. Add your API key to this file in the following format:
+
+    ```plaintext
+    API_KEY=your_api_key_here
+    ```
+
+    <button onclick="navigator.clipboard.writeText(`API_KEY=your_api_key_here`);">Copy</button>
+
+5. **Save and Close**: Save the `.env` file and close it.
+
 
 ## Dashboard Samples
 
